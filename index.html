@@ -1135,7 +1135,18 @@ function renderBudget() {
   }
 
   // Summary card
-  html+='<div class="card mb-12"><div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;text-align:center">'
+  var balance=VAR_POOL-totSpent;
+  html+='<div class="card mb-12">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">'
+    +'<div><div class="hl">Balance</div><div style="font-size:24px;font-weight:700;color:'+(balance<0?'var(--red)':'var(--green)')+'">'+fmt(balance)+'</div><div style="font-size:11px;color:var(--text3)">Pool − Spent</div></div>'
+    +'<div style="text-align:right"><div class="hl">Pool</div><div style="font-weight:700">'+fmt(VAR_POOL)+'</div></div>'
+    +'</div>'
+    +'<div class="pb-wrap"><div class="pb-fill '+pbClass(totSpent,VAR_POOL)+'" style="width:'+pct(totSpent,VAR_POOL)+'%"></div></div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;margin-top:10px">'
+    +'<div><div class="hl">Spent</div><div style="font-weight:700;color:'+(totSpent>VAR_POOL?'var(--red)':'inherit')+'">'+fmt(totSpent)+'</div></div>'
+    +'<div><div class="hl">Planned</div><div style="font-weight:700;color:var(--amber)">'+fmt(totPlanned)+'</div></div>'
+    +'<div><div class="hl">Committed</div><div style="font-weight:700;color:'+(totCommitted>VAR_POOL?'var(--red)':'inherit')+'">'+fmt(totCommitted)+'</div></div>'
+    +'</div></div>';
     +'<div><div class="hl">Pool</div><div style="font-weight:700">'+fmt(VAR_POOL)+'</div></div>'
     +'<div><div class="hl">Spent</div><div style="font-weight:700;color:'+(totSpent>VAR_POOL?'var(--red)':'inherit')+'">'+fmt(totSpent)+'</div></div>'
     +'<div><div class="hl">Planned</div><div style="font-weight:700;color:var(--amber)">'+fmt(totPlanned)+'</div></div>'
