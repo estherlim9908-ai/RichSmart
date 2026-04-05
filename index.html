@@ -1431,8 +1431,8 @@ function renderNW() {
   var breakdownTotal=0;
   for(var bi=0;bi<numSlots;bi++){
     var nameKey='cashName'+bi, amtKey='cashAmt'+bi;
-    var bName=g(nameKey,'')||'';
-    var bAmt=+(S.netWorth[amtKey]||0);
+    var bName=(S.netWorth&&S.netWorth[nameKey])||'';
+    var bAmt=parseFloat((S.netWorth&&S.netWorth[amtKey])||0)||0;
     breakdownTotal+=bAmt;
     breakdownRows+='<div class="nw-row" style="gap:8px">'
       +'<input type="text" class="form-input" style="flex:1;padding:6px 10px;font-size:13px" placeholder="e.g. Maybank" value="'+bName+'" onblur="saveNWStr(\''+nameKey+'\',this.value)">'
@@ -1462,6 +1462,7 @@ function saveNWStr(key,val) {
   S.netWorth[key]=val;
   saveState();
   syncGS('upsert','NetWorth',{key:key,value:val});
+  showToast('✅ Name saved');
 }
 
 function saveCashBreakdown(idx,val) {
