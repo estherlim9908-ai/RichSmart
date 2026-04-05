@@ -1,5 +1,5 @@
 // RichSmart Service Worker v2
-const CACHE = 'richsmart-v4';
+const CACHE = 'richsmart-v5';
 
 self.addEventListener('install', e => {
   e.waitUntil(
